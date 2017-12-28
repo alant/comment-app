@@ -20,6 +20,7 @@ class App extends Component {
       <div className="appWrapper">
         <CommentInput onSubmit={this.submitEventHandler.bind(this)} />
         <CommentList comments={this.state.comments}/>
+        <span> something else </span>
       </div>
     );
   }
