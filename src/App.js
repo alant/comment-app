@@ -11,16 +11,36 @@ class App extends Component {
       comments: []
     }
   }
+  componentWillMount() {
+    this._loadComments();
+  }
+  _loadComments() {
+    const storedComments = localStorage.getItem('comments');
+    this.setState({comments: JSON.parse(storedComments)});
+  }
+  _saveComments(comments) {
+    localStorage.setItem('comments', JSON.stringify(comments));
+  }
   submitEventHandler(content) {
-    this.state.comments.push(content);
-    this.setState({comments:this.state.comments});
+    const prevComments = this.state.comments;
+    prevComments.push(content);
+    this.setState({comments:prevComments});
+    this._saveComments(prevComments);
+  }
+  handleDeleteComment(index) {
+    console.log('app:handleDeleteComment: ', index);
+    const comments = this.state.comments;
+    comments.splice(index, 1);
+    this.setState({ comments });
+    this._saveComments(comments);
   }
   render() {
     return (
       <div className="appWrapper">
         <CommentInput onSubmit={this.submitEventHandler.bind(this)} />
-        <CommentList comments={this.state.comments}/>
-        <span> something else </span>
+        <CommentList comments={this.state.comments}
+          onDeleteComment={this.handleDeleteComment.bind(this)}
+        />
       </div>
     );
   }

@@ -75,24 +75,43 @@
 
 /* 评论组件样式 */
 .comment {
+  position: relative;
   display: flex;
   border-bottom: 1px solid #f1f1f1;
   margin-bottom: 10px;
   padding-bottom: 10px;
   min-height: 50px;
+  word-break:break-all;
 }
 
 .comment .comment-username {
   padding-right: 5px;
+  color: #00a3cf;
   flex-shrink: 0;
 }
 
-.comment span {
-  color: #00a3cf;
-  font-style: italic;
+.comment-time {
+  position: absolute;
+  padding-right: 5px;
+  right: 0;
+  padding-top: 20px;
 }
 
 .comment p {
   margin: 0;
   /*text-indent: 2em;*/
+  word-wrap: break-word;
+}
+
+.comment:hover .comment-delete {
+  color: #00a3cf;
+}
+
+.comment-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: transparent;
+  font-size: 12px;
+  cursor: pointer;
 }
